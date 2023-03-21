@@ -6,8 +6,8 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1003</width>
-    <height>716</height>
+    <width>1050</width>
+    <height>700</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -475,7 +475,7 @@
      </widget>
     </item>
     <item>
-     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,4,0,0,4,0,0,2,0,0,1,0,3">
+     <layout class="QVBoxLayout" name="verticalLayout_3" stretch="0,4,0,0,4,0,0,2,0,0,1,0,1">
       <property name="spacing">
        <number>5</number>
       </property>
@@ -528,7 +528,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="GAIN_inInput">
+           <widget class="QLineEdit" name="GAIN_inLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1174,7 +1174,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceGAIN_inLineEdit_2">
+           <widget class="QLineEdit" name="sledGAIN_inLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1210,7 +1210,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceGAIN_inLineEdit_3">
+           <widget class="QLineEdit" name="sledGAIN_outLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1246,7 +1246,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceGAIN_inLineEdit_4">
+           <widget class="QLineEdit" name="sledThresholdLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1282,7 +1282,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceGAIN_inLineEdit_5">
+           <widget class="QLineEdit" name="sledSpeedLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1322,7 +1322,72 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_8"/>
+       <layout class="QHBoxLayout" name="horizontalLayout_8">
+        <item>
+         <widget class="QLabel" name="label_24">
+          <property name="minimumSize">
+           <size>
+            <width>80</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>Speed</string>
+          </property>
+          <property name="alignment">
+           <set>Qt::AlignCenter</set>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QLineEdit" name="spindleSpeedLineEdit">
+          <property name="minimumSize">
+           <size>
+            <width>120</width>
+            <height>0</height>
+           </size>
+          </property>
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>16777215</height>
+           </size>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <widget class="QPushButton" name="spindleSpeedBtn">
+          <property name="maximumSize">
+           <size>
+            <width>120</width>
+            <height>16777215</height>
+           </size>
+          </property>
+          <property name="text">
+           <string>即时更改</string>
+          </property>
+         </widget>
+        </item>
+        <item>
+         <spacer name="horizontalSpacer">
+          <property name="orientation">
+           <enum>Qt::Horizontal</enum>
+          </property>
+          <property name="sizeHint" stdset="0">
+           <size>
+            <width>40</width>
+            <height>20</height>
+           </size>
+          </property>
+         </spacer>
+        </item>
+       </layout>
       </item>
       <item>
        <widget class="Line" name="line_7">
@@ -1332,7 +1397,43 @@
        </widget>
       </item>
       <item>
-       <layout class="QHBoxLayout" name="horizontalLayout_9"/>
+       <layout class="QGridLayout" name="gridLayout">
+        <item row="1" column="0">
+         <widget class="QPushButton" name="saveParamsToFileBtn">
+          <property name="text">
+           <string>保存参数到文件</string>
+          </property>
+         </widget>
+        </item>
+        <item row="1" column="1">
+         <widget class="QPushButton" name="downloadParamsToMcuBtn">
+          <property name="text">
+           <string>参数下载到芯片</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="getParamsFromFileBtn">
+          <property name="text">
+           <string>从文件读入参数</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="1">
+         <widget class="QPushButton" name="uploadParamsToComBtn">
+          <property name="text">
+           <string>参数上传到电脑</string>
+          </property>
+         </widget>
+        </item>
+        <item row="2" column="0">
+         <widget class="QPushButton" name="uploadParamsToDatabaseBtn">
+          <property name="text">
+           <string>参数上传到数据库</string>
+          </property>
+         </widget>
+        </item>
+       </layout>
       </item>
      </layout>
     </item>
@@ -1343,7 +1444,7 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>1003</width>
+     <width>1050</width>
      <height>26</height>
     </rect>
    </property>
