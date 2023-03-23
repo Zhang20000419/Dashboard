@@ -76,7 +76,13 @@
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="portNumberB"/>
+         <widget class="QComboBox" name="portNumberB">
+          <item>
+           <property name="text">
+            <string>COM14</string>
+           </property>
+          </item>
+         </widget>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="baudL">
@@ -94,12 +100,12 @@
           </item>
           <item>
            <property name="text">
-            <string>4800</string>
+            <string>9600</string>
            </property>
           </item>
           <item>
            <property name="text">
-            <string>9600</string>
+            <string>4800</string>
            </property>
           </item>
          </widget>
@@ -885,7 +891,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceBIAS_inLineEdit">
+           <widget class="QLineEdit" name="trackBIAS_inLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -917,7 +923,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceGAIN_inLineEdit">
+           <widget class="QLineEdit" name="trackGAIN_inLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -966,7 +972,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="traceIIR1a0LineEdit">
+             <widget class="QLineEdit" name="trackIIR1a0LineEdit">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -983,7 +989,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="traceIIR1a1LineEdit">
+             <widget class="QLineEdit" name="trackIIR1a1LineEdit">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -1000,7 +1006,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="traceIIR1b1LineEdit">
+             <widget class="QLineEdit" name="trackIIR1b1LineEdit">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -1045,7 +1051,7 @@
              </widget>
             </item>
             <item row="0" column="1">
-             <widget class="QLineEdit" name="traceIIR2a0LineEdit">
+             <widget class="QLineEdit" name="trackIIR2a0LineEdit">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -1062,7 +1068,7 @@
              </widget>
             </item>
             <item row="1" column="1">
-             <widget class="QLineEdit" name="traceIIR2a1LineEdit">
+             <widget class="QLineEdit" name="trackIIR2a1LineEdit">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -1079,7 +1085,7 @@
              </widget>
             </item>
             <item row="2" column="1">
-             <widget class="QLineEdit" name="traceIIR2b1LineEdit">
+             <widget class="QLineEdit" name="trackIIR2b1LineEdit">
               <property name="minimumSize">
                <size>
                 <width>120</width>
@@ -1115,7 +1121,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceBIAS_outLineEdit">
+           <widget class="QLineEdit" name="trackBIAS_outLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1144,7 +1150,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="traceGAIN_outLineEdit">
+           <widget class="QLineEdit" name="trackGAIN_outLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1542,16 +1548,16 @@
   <tabstop>forceIIR2b1LineEdit</tabstop>
   <tabstop>forceBIAS_outLineEdit</tabstop>
   <tabstop>forceGAIN_outLineEdit</tabstop>
-  <tabstop>traceBIAS_inLineEdit</tabstop>
-  <tabstop>traceGAIN_inLineEdit</tabstop>
-  <tabstop>traceIIR1a0LineEdit</tabstop>
-  <tabstop>traceIIR1a1LineEdit</tabstop>
-  <tabstop>traceIIR1b1LineEdit</tabstop>
-  <tabstop>traceIIR2a0LineEdit</tabstop>
-  <tabstop>traceIIR2a1LineEdit</tabstop>
-  <tabstop>traceIIR2b1LineEdit</tabstop>
-  <tabstop>traceBIAS_outLineEdit</tabstop>
-  <tabstop>traceGAIN_outLineEdit</tabstop>
+  <tabstop>trackBIAS_inLineEdit</tabstop>
+  <tabstop>trackGAIN_inLineEdit</tabstop>
+  <tabstop>trackIIR1a0LineEdit</tabstop>
+  <tabstop>trackIIR1a1LineEdit</tabstop>
+  <tabstop>trackIIR1b1LineEdit</tabstop>
+  <tabstop>trackIIR2a0LineEdit</tabstop>
+  <tabstop>trackIIR2a1LineEdit</tabstop>
+  <tabstop>trackIIR2b1LineEdit</tabstop>
+  <tabstop>trackBIAS_outLineEdit</tabstop>
+  <tabstop>trackGAIN_outLineEdit</tabstop>
   <tabstop>sledGAIN_inLineEdit</tabstop>
   <tabstop>sledGAIN_outLineEdit</tabstop>
   <tabstop>sledThresholdLineEdit</tabstop>
@@ -1565,8 +1571,518 @@
   <tabstop>uploadParamsToDatabaseBtn</tabstop>
  </tabstops>
  <resources/>
- <connections/>
+ <connections>
+  <connection>
+   <sender>GAIN_inLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceGAINin(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>435</x>
+     <y>122</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>563</x>
+     <y>33</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceIIR1a0LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceIIR1a0(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>663</x>
+     <y>107</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>761</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceIIR1a1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceIIR1a1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>618</x>
+     <y>133</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>961</x>
+     <y>36</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceIIR1b1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceIIR1b1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>636</x>
+     <y>165</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>402</x>
+     <y>34</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceIIR2a0LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceIIR2a0(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>820</x>
+     <y>111</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>739</x>
+     <y>-23</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceIIR2a1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceIIR2a1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>765</x>
+     <y>137</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>750</x>
+     <y>-19</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceIIR2b1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceIIR2b1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>789</x>
+     <y>171</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>771</x>
+     <y>-4</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceBIAS_outLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceBIASout(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>974</x>
+     <y>115</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>863</x>
+     <y>-20</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>forceGAIN_outLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getforceGAINout(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>925</x>
+     <y>189</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>878</x>
+     <y>-15</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackBIAS_inLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackBIASin(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>466</x>
+     <y>289</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>496</x>
+     <y>-8</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackGAIN_inLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackGAINin(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>513</x>
+     <y>367</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>523</x>
+     <y>-17</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackIIR1a0LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackIIR1a0(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>670</x>
+     <y>275</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>822</x>
+     <y>-30</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackIIR1a1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackIIR1a1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>598</x>
+     <y>316</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>715</x>
+     <y>66</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackIIR1b1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackIIR1b1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>630</x>
+     <y>345</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>557</x>
+     <y>235</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackIIR2a0LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackIIR2a0(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>837</x>
+     <y>279</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>715</x>
+     <y>241</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackIIR2a1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackIIR2a1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>806</x>
+     <y>310</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>732</x>
+     <y>237</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackIIR2b1LineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackIIR2b1(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>777</x>
+     <y>350</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>727</x>
+     <y>275</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackBIAS_outLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackBIASout(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>970</x>
+     <y>284</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>888</x>
+     <y>238</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>trackGAIN_outLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>gettrackGAINout(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>915</x>
+     <y>362</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1019</x>
+     <y>243</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sledGAIN_inLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getsledGAINin(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>470</x>
+     <y>456</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>495</x>
+     <y>388</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sledGAIN_outLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getsledGAINout(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>672</x>
+     <y>460</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>699</x>
+     <y>387</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sledThresholdLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getsledThreshold(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>841</x>
+     <y>461</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>894</x>
+     <y>390</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sledSpeedLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getsledSpeed(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>1005</x>
+     <y>464</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>1020</x>
+     <y>409</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spindleSpeedLineEdit</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getspindleSpeed(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>566</x>
+     <y>541</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>545</x>
+     <y>482</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>spindleSpeedBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>useSpindleSpeed()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>696</x>
+     <y>532</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>744</x>
+     <y>520</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>saveParamsToFileBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>saveParamsToFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>633</x>
+     <y>583</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>723</x>
+     <y>542</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>downloadParamsToMcuBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>downloadParamsToMcu()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>903</x>
+     <y>574</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>931</x>
+     <y>524</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>getParamsFromFileBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getParamsFromFile()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>709</x>
+     <y>612</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>658</x>
+     <y>725</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>uploadParamsToComBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>uploadParamsToCom()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>799</x>
+     <y>605</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>806</x>
+     <y>761</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>uploadParamsToDatabaseBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>uploadParamsToDatabase()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>641</x>
+     <y>642</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>616</x>
+     <y>778</y>
+    </hint>
+   </hints>
+  </connection>
+ </connections>
  <slots>
-  <slot>btn1Clicked()</slot>
+  <slot>getforceGAINin(QString)</slot>
+  <slot>getforceIIR1a0(QString)</slot>
+  <slot>getforceIIR1a1(QString)</slot>
+  <slot>getforceIIR1b1(QString)</slot>
+  <slot>getforceIIR2a0(QString)</slot>
+  <slot>getforceIIR2a1(QString)</slot>
+  <slot>getforceIIR2b1(QString)</slot>
+  <slot>getforceBIASout(QString)</slot>
+  <slot>getforceGAINout(QString)</slot>
+  <slot>gettrackBIASin(QString)</slot>
+  <slot>gettrackGAINin(QString)</slot>
+  <slot>gettrackIIR1a0(QString)</slot>
+  <slot>gettrackIIR1a1(QString)</slot>
+  <slot>gettrackIIR1b1(QString)</slot>
+  <slot>gettrackIIR2a0(QString)</slot>
+  <slot>gettrackIIR2a1(QString)</slot>
+  <slot>gettrackIIR2b1(QString)</slot>
+  <slot>gettrackBIASout(QString)</slot>
+  <slot>gettrackGAINout(QString)</slot>
+  <slot>getsledGAINin(QString)</slot>
+  <slot>getsledGAINout(QString)</slot>
+  <slot>getsledThreshold(QString)</slot>
+  <slot>getsledSpeed(QString)</slot>
+  <slot>getspindleSpeed(QString)</slot>
+  <slot>useSpindleSpeed()</slot>
+  <slot>saveParamsToFile()</slot>
+  <slot>downloadParamsToMcu()</slot>
+  <slot>getParamsFromFile()</slot>
+  <slot>uploadParamsToCom()</slot>
+  <slot>uploadParamsToDatabase()</slot>
  </slots>
 </ui>
