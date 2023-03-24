@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>1050</width>
-    <height>700</height>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -534,7 +534,7 @@
            </widget>
           </item>
           <item>
-           <widget class="QLineEdit" name="GAIN_inLineEdit">
+           <widget class="QLineEdit" name="forceGAIN_inLineEdit">
             <property name="minimumSize">
              <size>
               <width>120</width>
@@ -1401,19 +1401,6 @@
          </widget>
         </item>
         <item>
-         <widget class="QPushButton" name="spindleSpeedBtn">
-          <property name="maximumSize">
-           <size>
-            <width>120</width>
-            <height>16777215</height>
-           </size>
-          </property>
-          <property name="text">
-           <string>即时更改</string>
-          </property>
-         </widget>
-        </item>
-        <item>
          <spacer name="horizontalSpacer">
           <property name="orientation">
            <enum>Qt::Horizontal</enum>
@@ -1437,35 +1424,6 @@
       </item>
       <item>
        <layout class="QGridLayout" name="gridLayout">
-        <item row="2" column="0">
-         <widget class="QPushButton" name="uploadParamsToDatabaseBtn">
-          <property name="toolTipDuration">
-           <number>-1</number>
-          </property>
-          <property name="text">
-           <string>参数上传到数据库</string>
-          </property>
-          <property name="checkable">
-           <bool>true</bool>
-          </property>
-          <property name="autoDefault">
-           <bool>false</bool>
-          </property>
-          <property name="default">
-           <bool>false</bool>
-          </property>
-          <property name="flat">
-           <bool>false</bool>
-          </property>
-         </widget>
-        </item>
-        <item row="0" column="0">
-         <widget class="QPushButton" name="saveParamsToFileBtn">
-          <property name="text">
-           <string>保存参数到文件</string>
-          </property>
-         </widget>
-        </item>
         <item row="0" column="1">
          <widget class="QPushButton" name="downloadParamsToMcuBtn">
           <property name="text">
@@ -1477,6 +1435,13 @@
          <widget class="QPushButton" name="uploadParamsToComBtn">
           <property name="text">
            <string>参数上传到电脑</string>
+          </property>
+         </widget>
+        </item>
+        <item row="0" column="0">
+         <widget class="QPushButton" name="saveParamsToFileBtn">
+          <property name="text">
+           <string>保存参数到文件</string>
           </property>
          </widget>
         </item>
@@ -1539,7 +1504,7 @@
   <tabstop>pushButton_11</tabstop>
   <tabstop>pushButton_12</tabstop>
   <tabstop>pushButton_13</tabstop>
-  <tabstop>GAIN_inLineEdit</tabstop>
+  <tabstop>forceGAIN_inLineEdit</tabstop>
   <tabstop>forceIIR1a0LineEdit</tabstop>
   <tabstop>forceIIR1a1LineEdit</tabstop>
   <tabstop>forceIIR1b1LineEdit</tabstop>
@@ -1563,17 +1528,15 @@
   <tabstop>sledThresholdLineEdit</tabstop>
   <tabstop>sledSpeedLineEdit</tabstop>
   <tabstop>spindleSpeedLineEdit</tabstop>
-  <tabstop>spindleSpeedBtn</tabstop>
   <tabstop>saveParamsToFileBtn</tabstop>
   <tabstop>downloadParamsToMcuBtn</tabstop>
   <tabstop>getParamsFromFileBtn</tabstop>
   <tabstop>uploadParamsToComBtn</tabstop>
-  <tabstop>uploadParamsToDatabaseBtn</tabstop>
  </tabstops>
  <resources/>
  <connections>
   <connection>
-   <sender>GAIN_inLineEdit</sender>
+   <sender>forceGAIN_inLineEdit</sender>
    <signal>textChanged(QString)</signal>
    <receiver>MainWindow</receiver>
    <slot>getforceGAINin(QString)</slot>
@@ -1648,7 +1611,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
-     <y>-23</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1664,7 +1627,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>750</x>
-     <y>-19</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1680,7 +1643,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>771</x>
-     <y>-4</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1696,7 +1659,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>863</x>
-     <y>-20</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1712,7 +1675,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>878</x>
-     <y>-15</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1728,7 +1691,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>496</x>
-     <y>-8</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1739,12 +1702,12 @@
    <slot>gettrackGAINin(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>513</x>
-     <y>367</y>
+     <x>537</x>
+     <y>361</y>
     </hint>
     <hint type="destinationlabel">
      <x>523</x>
-     <y>-17</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1760,7 +1723,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>822</x>
-     <y>-30</y>
+     <y>0</y>
     </hint>
    </hints>
   </connection>
@@ -1835,8 +1798,8 @@
    <slot>gettrackIIR2b1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>777</x>
-     <y>350</y>
+     <x>880</x>
+     <y>348</y>
     </hint>
     <hint type="destinationlabel">
      <x>727</x>
@@ -1867,8 +1830,8 @@
    <slot>gettrackGAINout(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>915</x>
-     <y>362</y>
+     <x>1035</x>
+     <y>361</y>
     </hint>
     <hint type="destinationlabel">
      <x>1019</x>
@@ -1915,8 +1878,8 @@
    <slot>getsledThreshold(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>841</x>
-     <y>461</y>
+     <x>875</x>
+     <y>460</y>
     </hint>
     <hint type="destinationlabel">
      <x>894</x>
@@ -1931,8 +1894,8 @@
    <slot>getsledSpeed(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>1005</x>
-     <y>464</y>
+     <x>1035</x>
+     <y>460</y>
     </hint>
     <hint type="destinationlabel">
      <x>1020</x>
@@ -1947,28 +1910,12 @@
    <slot>getspindleSpeed(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>566</x>
-     <y>541</y>
+     <x>608</x>
+     <y>530</y>
     </hint>
     <hint type="destinationlabel">
      <x>545</x>
      <y>482</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>spindleSpeedBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>useSpindleSpeed()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>696</x>
-     <y>532</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>744</x>
-     <y>520</y>
     </hint>
    </hints>
   </connection>
@@ -1979,8 +1926,8 @@
    <slot>saveParamsToFile()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>633</x>
-     <y>583</y>
+     <x>715</x>
+     <y>577</y>
     </hint>
     <hint type="destinationlabel">
      <x>723</x>
@@ -2016,39 +1963,7 @@
     </hint>
     <hint type="destinationlabel">
      <x>658</x>
-     <y>725</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>uploadParamsToComBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>uploadParamsToCom()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>799</x>
-     <y>605</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>806</x>
-     <y>761</y>
-    </hint>
-   </hints>
-  </connection>
-  <connection>
-   <sender>uploadParamsToDatabaseBtn</sender>
-   <signal>clicked()</signal>
-   <receiver>MainWindow</receiver>
-   <slot>uploadParamsToDatabase()</slot>
-   <hints>
-    <hint type="sourcelabel">
-     <x>641</x>
-     <y>642</y>
-    </hint>
-    <hint type="destinationlabel">
-     <x>616</x>
-     <y>778</y>
+     <y>650</y>
     </hint>
    </hints>
   </connection>
