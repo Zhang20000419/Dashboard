@@ -11,7 +11,7 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>伺服控制系统</string>
   </property>
   <property name="iconSize">
    <size>
@@ -69,20 +69,14 @@
          <number>10</number>
         </property>
         <item row="0" column="0">
-         <widget class="QLabel" name="portNumberL">
+         <widget class="QLabel" name="Label">
           <property name="text">
            <string>端口号:</string>
           </property>
          </widget>
         </item>
         <item row="0" column="1">
-         <widget class="QComboBox" name="portNumberB">
-          <item>
-           <property name="text">
-            <string>COM14</string>
-           </property>
-          </item>
-         </widget>
+         <widget class="QLineEdit" name="portB"/>
         </item>
         <item row="1" column="0">
          <widget class="QLabel" name="baudL">
@@ -1480,7 +1474,7 @@
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
  <tabstops>
-  <tabstop>portNumberB</tabstop>
+  <tabstop>portB</tabstop>
   <tabstop>baudB</tabstop>
   <tabstop>databitsB</tabstop>
   <tabstop>checkbitsB</tabstop>
@@ -1967,6 +1961,150 @@
     </hint>
    </hints>
   </connection>
+  <connection>
+   <sender>portB</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getportB(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>173</x>
+     <y>88</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>70</x>
+     <y>-26</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>baudB</sender>
+   <signal>currentIndexChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getbaudB(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>110</x>
+     <y>116</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>106</x>
+     <y>63</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>databitsB</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getdatabitsB(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>135</x>
+     <y>150</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>137</x>
+     <y>57</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>checkbitsB</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getcheckbitsB(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>156</x>
+     <y>180</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>155</x>
+     <y>31</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>stopbitsB</sender>
+   <signal>textChanged(QString)</signal>
+   <receiver>MainWindow</receiver>
+   <slot>getstopbitsB(QString)</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>188</x>
+     <y>212</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>226</x>
+     <y>212</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>openBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>openSerial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>50</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>8</x>
+     <y>225</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>closeBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>closeSerial()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>204</x>
+     <y>256</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>215</x>
+     <y>274</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>sendBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>sendInfo()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>203</x>
+     <y>311</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>230</x>
+     <y>303</y>
+    </hint>
+   </hints>
+  </connection>
+  <connection>
+   <sender>clearBtn</sender>
+   <signal>clicked()</signal>
+   <receiver>MainWindow</receiver>
+   <slot>clearWindow()</slot>
+   <hints>
+    <hint type="sourcelabel">
+     <x>195</x>
+     <y>386</y>
+    </hint>
+    <hint type="destinationlabel">
+     <x>223</x>
+     <y>409</y>
+    </hint>
+   </hints>
+  </connection>
  </connections>
  <slots>
   <slot>getforceGAINin(QString)</slot>
@@ -1999,5 +2137,14 @@
   <slot>getParamsFromFile()</slot>
   <slot>uploadParamsToCom()</slot>
   <slot>uploadParamsToDatabase()</slot>
+  <slot>getportB(QString)</slot>
+  <slot>getbaudB(QString)</slot>
+  <slot>getdatabitsB(QString)</slot>
+  <slot>getcheckbitsB(QString)</slot>
+  <slot>getstopbitsB(QString)</slot>
+  <slot>openSerial()</slot>
+  <slot>closeSerial()</slot>
+  <slot>sendInfo()</slot>
+  <slot>clearWindow()</slot>
  </slots>
 </ui>

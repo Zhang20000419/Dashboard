@@ -1,5 +1,8 @@
 import os
 import sys
+
+from PyQt5 import QtGui
+
 import test
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -8,13 +11,18 @@ import serial
 
 
 class MyMainWindow(QMainWindow, test.Ui_MainWindow):
-
+    """通过串口传递参数和命令时，串口写入的数据第一部分分为：parameter和command两种"""
     def __init__(self):
         super(MyMainWindow, self).__init__()
+        self.aSerial = None
         self.setupUi(self)
         self.dictNameToValue = {}
-        self.port = "COM14"
+        # 串口连接和通信参数
+        self.port = ""
         self.baud = "115200"
+        self.databits = "1"
+        self.checkbits = "0"
+        self.stopbits = "0"
         self.dictNameToBtn = {"forceGAINin":self.forceGAIN_inLineEdit,
                               "forceIIR1a0":self.forceIIR1a0LineEdit,
                               "forceIIR1a1":self.forceIIR1a1LineEdit,
@@ -39,6 +47,21 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
                               "sledThreshold":self.sledThresholdLineEdit,
                               "sledSpeed":self.sledSpeedLineEdit,
                               "spindleSpeed":self.spindleSpeedLineEdit}
+
+    def getportB(self, portB):
+        self.port = portB
+
+    def getbaudB(self, baudB):
+        self.baud = baudB
+
+    def getdatabitsB(self, databits):
+        self.databits = databits
+
+    def getcheckbitsB(self, checkbits):
+        self.checkbits = checkbits
+
+    def getstopbitsB(self, stopbits):
+        self.stopbits = stopbits
 
     def getforceGAINin(self, forceGAINin):
         self.dictNameToValue.update({"forceGAINin": forceGAINin})
@@ -112,28 +135,41 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     def getspindleSpeed(self, spindleSpeed):
         self.dictNameToValue.update({"spindleSpeed": spindleSpeed})
 
-    def downloadParamsToMcu(self):
-        # 检测端口号和波特率是否为空
+    def openSerial(self):
         if self.connectCheck():
             try:
-                aSerial = self.connectMcu()
-                if aSerial.isOpen():
-                    aSerial.write(dict)
-                    aSerial.close()
-                else:
-                    self.messageDialog("串口打开失败")
+                self.aSerial = self.connectMcu()
             except Exception:
-                self.messageDialog("与串口通信异常")
+                self.messageError("与串口通信异常")
+
+    def closeSerial(self):
+        if self.checkSerial():
+            self.aSerial.close()
+        else:
+            self.messageError("串口未打开")
+
+    def sendInfo(self):
+        if self.checkSerial():
+            try:
+                self.aSerial.write("order#"+self.orderInput.text())
+            except Exception:
+                self.messageError("发送失败")
+        else:
+            self.messageError("请先打开串口")
+
+    def clearWindow(self):
+        self.InfoReceived.clear()
+
+    def downloadParamsToMcu(self):
+        if self.checkSerial():
+            self.aSerial.write("parameter#" + str(dict))
+            self.messageSuccess("参数发送成功")
+        else:
+            self.messageError("串口未打开")
 
     def connectCheck(self):
-        if self.port == "" and self.baud == "":
-            self.messageDialog("端口号和波特率不能为空")
-            return False
-        elif self.port == "":
-            self.messageDialog("端口号不能为空")
-            return False
-        elif self.baud == "":
-            self.messageDialog("波特率不能为空")
+        if self.port == "":
+            self.messageError("端口号不能为空")
             return False
         return True
 
@@ -163,12 +199,27 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
                 self.dictNameToBtn.get(pair[0]).setText(pair[1])
 
     @staticmethod
-    def messageDialog(text):
+    def messageError(text):
         msg_box = QMessageBox(QMessageBox.Warning, "error", text)
         msg_box.exec_()
 
+    @staticmethod
+    def messageSuccess(text):
+        msg_box = QMessageBox(QMessageBox.Information, "成功", text)
+        msg_box.exec_()
+
     def connectMcu(self):
-        return serial.Serial(self.port, self.baud, timeout=2)
+        return serial.Serial(self.port, self.baud, timeout=2, bytesize=self.databits, parity=self.checkbits,
+                             stopbits=self.stopbits)
+
+    def checkSerial(self):
+        return self.aSerial is not None and self.aSerial.isOpen()
+
+    def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        if self.checkSerial():
+            self.aSerial.close()
+        super().closeEvent(a0)
+
 
 def main():
     app = QApplication(sys.argv)
@@ -179,3 +230,4 @@ def main():
 
 if __name__ == '__main__':
     main()
+
