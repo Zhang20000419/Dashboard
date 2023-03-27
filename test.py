@@ -677,6 +677,7 @@ class Ui_MainWindow(object):
         self.openBtn.clicked.connect(MainWindow.openSerial)
         self.closeBtn.clicked.connect(MainWindow.closeSerial)
         self.sendBtn.clicked.connect(MainWindow.sendInfo)
+        self.clearBtn.clicked.connect(MainWindow.clearWindow)
         QtCore.QMetaObject.connectSlotsByName(MainWindow)
         MainWindow.setTabOrder(self.portB, self.baudB)
         MainWindow.setTabOrder(self.baudB, self.databitsB)
