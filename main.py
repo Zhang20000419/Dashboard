@@ -12,6 +12,7 @@ import serial
 
 class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     """通过串口传递参数和命令时，串口写入的数据第一部分分为：parameter和command两种"""
+
     def __init__(self):
         super(MyMainWindow, self).__init__()
         self.aSerial = None
@@ -23,30 +24,30 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         self.databits = "1"
         self.checkbits = "0"
         self.stopbits = "0"
-        self.dictNameToBtn = {"forceGAINin":self.forceGAIN_inLineEdit,
-                              "forceIIR1a0":self.forceIIR1a0LineEdit,
-                              "forceIIR1a1":self.forceIIR1a1LineEdit,
-                              "forceIIR1b1":self.forceIIR1b1LineEdit,
-                              "forceIIR2a0":self.forceIIR2a0LineEdit,
-                              "forceIIR2a1":self.forceIIR2a1LineEdit,
-                              "forceIIR2b1":self.forceIIR2b1LineEdit,
-                              "forceBIASout":self.forceBIAS_outLineEdit,
-                              "forceGAINout":self.forceGAIN_outLineEdit,
-                              "trackBIASin":self.trackBIAS_inLineEdit,
-                              "trackGAINin":self.trackGAIN_inLineEdit,
-                              "trackIIR1a0":self.trackIIR1a0LineEdit,
-                              "trackIIR1a1":self.trackIIR1a1LineEdit,
-                              "trackIIR1b1":self.trackIIR1b1LineEdit,
-                              "trackIIR2a0":self.trackIIR2a0LineEdit,
-                              "trackIIR2a1":self.trackIIR2a1LineEdit,
-                              "trackIIR2b1":self.trackIIR2b1LineEdit,
-                              "trackBIASout":self.trackBIAS_outLineEdit,
-                              "trackGAINout":self.trackGAIN_outLineEdit,
-                              "sledGAINin":self.sledGAIN_inLineEdit,
-                              "sledGAINout":self.sledGAIN_outLineEdit,
-                              "sledThreshold":self.sledThresholdLineEdit,
-                              "sledSpeed":self.sledSpeedLineEdit,
-                              "spindleSpeed":self.spindleSpeedLineEdit}
+        self.dictNameToBtn = {"forceGAINin": self.forceGAIN_inLineEdit,
+                              "forceIIR1a0": self.forceIIR1a0LineEdit,
+                              "forceIIR1a1": self.forceIIR1a1LineEdit,
+                              "forceIIR1b1": self.forceIIR1b1LineEdit,
+                              "forceIIR2a0": self.forceIIR2a0LineEdit,
+                              "forceIIR2a1": self.forceIIR2a1LineEdit,
+                              "forceIIR2b1": self.forceIIR2b1LineEdit,
+                              "forceBIASout": self.forceBIAS_outLineEdit,
+                              "forceGAINout": self.forceGAIN_outLineEdit,
+                              "trackBIASin": self.trackBIAS_inLineEdit,
+                              "trackGAINin": self.trackGAIN_inLineEdit,
+                              "trackIIR1a0": self.trackIIR1a0LineEdit,
+                              "trackIIR1a1": self.trackIIR1a1LineEdit,
+                              "trackIIR1b1": self.trackIIR1b1LineEdit,
+                              "trackIIR2a0": self.trackIIR2a0LineEdit,
+                              "trackIIR2a1": self.trackIIR2a1LineEdit,
+                              "trackIIR2b1": self.trackIIR2b1LineEdit,
+                              "trackBIASout": self.trackBIAS_outLineEdit,
+                              "trackGAINout": self.trackGAIN_outLineEdit,
+                              "sledGAINin": self.sledGAIN_inLineEdit,
+                              "sledGAINout": self.sledGAIN_outLineEdit,
+                              "sledThreshold": self.sledThresholdLineEdit,
+                              "sledSpeed": self.sledSpeedLineEdit,
+                              "spindleSpeed": self.spindleSpeedLineEdit}
 
     def getportB(self, portB):
         self.port = portB
@@ -151,7 +152,7 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     def sendInfo(self):
         if self.checkSerial():
             try:
-                self.aSerial.write("order#"+self.orderInput.text())
+                self.aSerial.write("order#" + self.orderInput.text())
             except Exception:
                 self.messageError("发送失败")
         else:
@@ -178,6 +179,8 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         dlg.setFileMode(QFileDialog.AnyFile)
         dlg.setAcceptMode(QFileDialog.AcceptSave)
         filename = dlg.getSaveFileName(self, "保存文件", ".", "Text Files (*.txt)")
+        if filename[0] == '' and filename[1] == '':
+            return
         f = open(filename[0], 'w')
         with f:
             for key in self.dictNameToValue.keys():
@@ -188,10 +191,12 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         dlg.setFileMode(QFileDialog.AnyFile)
         dlg.setAcceptMode(QFileDialog.AcceptOpen)
         filename = dlg.getOpenFileName(self, "打开文件", ".", "Text Files (*.txt)")
+        if filename[0] == '' and filename[1] == '':
+            return
+        f = open(filename[0], 'r')
         for key in self.dictNameToValue.keys():
             self.dictNameToBtn.get(key).setText("")
         self.dictNameToValue.clear()
-        f = open(filename[0], 'r')
         with f:
             for line in f:
                 pair = line.rstrip().split(":")
@@ -230,4 +235,3 @@ def main():
 
 if __name__ == '__main__':
     main()
-
