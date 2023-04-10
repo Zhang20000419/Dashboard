@@ -1467,7 +1467,7 @@
      <x>0</x>
      <y>0</y>
      <width>1050</width>
-     <height>26</height>
+     <height>23</height>
     </rect>
    </property>
   </widget>
@@ -1552,8 +1552,8 @@
    <slot>getforceIIR1a0(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>663</x>
-     <y>107</y>
+     <x>709</x>
+     <y>105</y>
     </hint>
     <hint type="destinationlabel">
      <x>761</x>
@@ -1568,8 +1568,8 @@
    <slot>getforceIIR1a1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>618</x>
-     <y>133</y>
+     <x>709</x>
+     <y>132</y>
     </hint>
     <hint type="destinationlabel">
      <x>961</x>
@@ -1584,8 +1584,8 @@
    <slot>getforceIIR1b1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>636</x>
-     <y>165</y>
+     <x>709</x>
+     <y>159</y>
     </hint>
     <hint type="destinationlabel">
      <x>402</x>
@@ -1600,8 +1600,8 @@
    <slot>getforceIIR2a0(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>820</x>
-     <y>111</y>
+     <x>874</x>
+     <y>105</y>
     </hint>
     <hint type="destinationlabel">
      <x>739</x>
@@ -1616,8 +1616,8 @@
    <slot>getforceIIR2a1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>765</x>
-     <y>137</y>
+     <x>874</x>
+     <y>131</y>
     </hint>
     <hint type="destinationlabel">
      <x>750</x>
@@ -1632,8 +1632,8 @@
    <slot>getforceIIR2b1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>789</x>
-     <y>171</y>
+     <x>874</x>
+     <y>157</y>
     </hint>
     <hint type="destinationlabel">
      <x>771</x>
@@ -1728,8 +1728,8 @@
    <slot>gettrackIIR1a1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>598</x>
-     <y>316</y>
+     <x>709</x>
+     <y>308</y>
     </hint>
     <hint type="destinationlabel">
      <x>715</x>
@@ -1744,8 +1744,8 @@
    <slot>gettrackIIR1b1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>630</x>
-     <y>345</y>
+     <x>709</x>
+     <y>334</y>
     </hint>
     <hint type="destinationlabel">
      <x>557</x>
@@ -1776,8 +1776,8 @@
    <slot>gettrackIIR2a1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>806</x>
-     <y>310</y>
+     <x>874</x>
+     <y>308</y>
     </hint>
     <hint type="destinationlabel">
      <x>732</x>
@@ -1792,8 +1792,8 @@
    <slot>gettrackIIR2b1(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>880</x>
-     <y>348</y>
+     <x>874</x>
+     <y>334</y>
     </hint>
     <hint type="destinationlabel">
      <x>727</x>
@@ -1904,8 +1904,8 @@
    <slot>getspindleSpeed(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>608</x>
-     <y>530</y>
+     <x>606</x>
+     <y>542</y>
     </hint>
     <hint type="destinationlabel">
      <x>545</x>
@@ -2000,8 +2000,8 @@
    <slot>getdatabitsB(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>135</x>
-     <y>150</y>
+     <x>211</x>
+     <y>143</y>
     </hint>
     <hint type="destinationlabel">
      <x>137</x>
@@ -2016,8 +2016,8 @@
    <slot>getcheckbitsB(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>156</x>
-     <y>180</y>
+     <x>211</x>
+     <y>169</y>
     </hint>
     <hint type="destinationlabel">
      <x>155</x>
@@ -2032,8 +2032,8 @@
    <slot>getstopbitsB(QString)</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>188</x>
-     <y>212</y>
+     <x>211</x>
+     <y>195</y>
     </hint>
     <hint type="destinationlabel">
      <x>226</x>
@@ -2048,8 +2048,8 @@
    <slot>openSerial()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>50</x>
-     <y>256</y>
+     <x>61</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
      <x>8</x>
@@ -2064,8 +2064,8 @@
    <slot>closeSerial()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>204</x>
-     <y>256</y>
+     <x>220</x>
+     <y>237</y>
     </hint>
     <hint type="destinationlabel">
      <x>215</x>
@@ -2080,8 +2080,8 @@
    <slot>sendInfo()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>203</x>
-     <y>311</y>
+     <x>219</x>
+     <y>298</y>
     </hint>
     <hint type="destinationlabel">
      <x>230</x>
@@ -2096,8 +2096,8 @@
    <slot>clearWindow()</slot>
    <hints>
     <hint type="sourcelabel">
-     <x>195</x>
-     <y>386</y>
+     <x>219</x>
+     <y>374</y>
     </hint>
     <hint type="destinationlabel">
      <x>223</x>
@@ -2146,5 +2146,6 @@
   <slot>closeSerial()</slot>
   <slot>sendInfo()</slot>
   <slot>clearWindow()</slot>
+  <slot>getorderInput(QString)</slot>
  </slots>
 </ui>

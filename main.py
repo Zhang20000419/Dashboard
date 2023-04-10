@@ -8,6 +8,9 @@ from PyQt5.QtCore import *
 from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import serial
+import threading
+import time
+from threading import Event
 
 
 class MyMainWindow(QMainWindow, test.Ui_MainWindow):
@@ -48,6 +51,8 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
                               "sledThreshold": self.sledThresholdLineEdit,
                               "sledSpeed": self.sledSpeedLineEdit,
                               "spindleSpeed": self.spindleSpeedLineEdit}
+        self.event = Event()
+        self.infoReceivedThread = None
 
     def getportB(self, portB):
         self.port = portB
@@ -63,6 +68,9 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def getstopbitsB(self, stopbits):
         self.stopbits = stopbits
+
+    # def getorderInput(self, orderInput):
+    #     self.orderInput = orderInput
 
     def getforceGAINin(self, forceGAINin):
         self.dictNameToValue.update({"forceGAINin": forceGAINin})
@@ -140,11 +148,15 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         if self.connectCheck():
             try:
                 self.aSerial = self.connectMcu()
+                # 创建接收从嵌入式处理器传回信息的线程
+                self.infoReceivedThread = threading.Thread(target=self.updateInfoReceived, args=(self.event,))
+                self.infoReceivedThread.start()
             except Exception:
                 self.messageError("与串口通信异常")
 
     def closeSerial(self):
         if self.checkSerial():
+            self.event.set()
             self.aSerial.close()
         else:
             self.messageError("串口未打开")
@@ -152,7 +164,7 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     def sendInfo(self):
         if self.checkSerial():
             try:
-                self.aSerial.write("order#" + self.orderInput.text())
+                self.aSerial.write(str("order#" + self.orderInput.text()).encode("utf-8"))
             except Exception:
                 self.messageError("发送失败")
         else:
@@ -163,7 +175,7 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def downloadParamsToMcu(self):
         if self.checkSerial():
-            self.aSerial.write("parameter#" + str(dict))
+            self.aSerial.write(str("parameter#" + str(dict)).encode("utf-8"))
             self.messageSuccess("参数发送成功")
         else:
             self.messageError("串口未打开")
@@ -223,7 +235,17 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         if self.checkSerial():
             self.aSerial.close()
+        self.event.set()
         super().closeEvent(a0)
+
+    def updateInfoReceived(self, event):
+        while 1:
+            if self.checkSerial() and self.aSerial.available() > 0:
+                self.InfoReceived.append(self.aSerial.readline().decode("utf-8"))
+            if event.is_set():
+                event.clear()
+                break
+            time.sleep(0.1)
 
 
 def main():
