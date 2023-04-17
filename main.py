@@ -24,9 +24,9 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         # 串口连接和通信参数
         self.port = ""
         self.baud = "115200"
-        self.databits = "1"
-        self.checkbits = "0"
-        self.stopbits = "0"
+        self.databits = "8"
+        self.checkbits = "N"
+        self.stopbits = "1"
         self.dictNameToBtn = {"forceGAINin": self.forceGAIN_inLineEdit,
                               "forceIIR1a0": self.forceIIR1a0LineEdit,
                               "forceIIR1a1": self.forceIIR1a1LineEdit,
@@ -145,9 +145,15 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         self.dictNameToValue.update({"spindleSpeed": spindleSpeed})
 
     def openSerial(self):
+        if self.aSerial is not None:
+            if self.aSerial.isOpen():
+                self.aSerial.close()
         if self.connectCheck():
             try:
+                # 清空接收窗口
+                self.InfoReceived.clear()
                 self.aSerial = self.connectMcu()
+                print(self.aSerial)
                 # 创建接收从嵌入式处理器传回信息的线程
                 self.infoReceivedThread = threading.Thread(target=self.updateInfoReceived, args=(self.event,))
                 self.infoReceivedThread.start()
@@ -160,6 +166,13 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
             self.aSerial.close()
         else:
             self.messageError("串口未打开")
+
+    def connectMcu(self):
+        return serial.Serial(self.port, int(self.baud), bytesize=int(self.databits), parity=self.checkbits,
+                             stopbits=float(self.stopbits), timeout=2)
+
+    def checkSerial(self):
+        return self.aSerial is not None and self.aSerial.isOpen()
 
     def sendInfo(self):
         if self.checkSerial():
@@ -225,13 +238,6 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         msg_box = QMessageBox(QMessageBox.Information, "成功", text)
         msg_box.exec_()
 
-    def connectMcu(self):
-        return serial.Serial(self.port, self.baud, timeout=2, bytesize=self.databits, parity=self.checkbits,
-                             stopbits=self.stopbits)
-
-    def checkSerial(self):
-        return self.aSerial is not None and self.aSerial.isOpen()
-
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         if self.checkSerial():
             self.aSerial.close()
@@ -240,7 +246,7 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def updateInfoReceived(self, event):
         while 1:
-            if self.checkSerial() and self.aSerial.available() > 0:
+            if self.checkSerial() and self.aSerial.in_waiting > 0:
                 self.InfoReceived.append(self.aSerial.readline().decode("utf-8"))
             if event.is_set():
                 event.clear()
