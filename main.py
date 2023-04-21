@@ -1,8 +1,8 @@
 import os
 import sys
-
+from serial.tools import list_ports
 from PyQt5 import QtGui
-
+import os
 import test
 from PyQt5.QtCore import *
 from PyQt5.QtGui import *
@@ -12,6 +12,8 @@ import threading
 import time
 from threading import Event
 
+endChar = "!"
+fileCheckInfo = "servo's character file"
 
 class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     """通过串口传递参数和命令时，串口写入的数据第一部分分为：parameter和command两种"""
@@ -68,9 +70,6 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def getstopbitsB(self, stopbits):
         self.stopbits = stopbits
-
-    # def getorderInput(self, orderInput):
-    #     self.orderInput = orderInput
 
     def getforceGAINin(self, forceGAINin):
         self.dictNameToValue.update({"forceGAINin": forceGAINin})
@@ -153,12 +152,16 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
                 # 清空接收窗口
                 self.InfoReceived.clear()
                 self.aSerial = self.connectMcu()
-                print(self.aSerial)
+                # 检查是否与MCU建立了通信
+                # self.sendOpenCheckInfo()
                 # 创建接收从嵌入式处理器传回信息的线程
                 self.infoReceivedThread = threading.Thread(target=self.updateInfoReceived, args=(self.event,))
                 self.infoReceivedThread.start()
             except Exception:
-                self.messageError("与串口通信异常")
+                self.messageError("打开串口失败")
+
+    def sendOpenCheckInfo(self):
+        self.aSerial.write(str("#check#" + endChar).encode("utf-8"))
 
     def closeSerial(self):
         if self.checkSerial():
@@ -177,7 +180,7 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     def sendInfo(self):
         if self.checkSerial():
             try:
-                self.aSerial.write(str("order#" + self.orderInput.text()).encode("utf-8"))
+                self.aSerial.write(str("#order#" + self.orderInput.text() + endChar).encode("utf-8"))
             except Exception:
                 self.messageError("发送失败")
         else:
@@ -188,8 +191,8 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def downloadParamsToMcu(self):
         if self.checkSerial():
-            self.aSerial.write(str("parameter#" + str(dict)).encode("utf-8"))
-            self.messageSuccess("参数发送成功")
+            self.aSerial.write(str("#parameter#" + str(dict) + endChar).encode("utf-8"))
+            self.messageSuccess("参数已发送")
         else:
             self.messageError("串口未打开")
 
@@ -197,7 +200,12 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         if self.port == "":
             self.messageError("端口号不能为空")
             return False
-        return True
+        port_list = list(list_ports.comports())
+        for i in range(len(port_list)):
+            if port_list[i][0] == self.port:
+                return True
+        self.messageError("端口不存在，请检查端口号")
+        return False
 
     def saveParamsToFile(self):
         dlg = QFileDialog()
@@ -208,6 +216,7 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
             return
         f = open(filename[0], 'w')
         with f:
+            f.write(fileCheckInfo + "\n")
             for key in self.dictNameToValue.keys():
                 f.write(key + ":" + self.dictNameToValue.get(key) + "\n")
 
@@ -223,22 +232,38 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
             self.dictNameToBtn.get(key).setText("")
         self.dictNameToValue.clear()
         with f:
-            for line in f:
-                pair = line.rstrip().split(":")
+            lines = f.readlines()
+            for i in range(len(lines)):
+                if i == 0:
+                    if lines[i].rstrip() == "".join(fileCheckInfo):
+                        continue
+                    else:
+                        self.messageError("获取参数错误，不是参数文件")
+                        break
+                pair = lines[i].rstrip().split(":")
                 self.dictNameToValue.update({pair[0]: pair[1]})
                 self.dictNameToBtn.get(pair[0]).setText(pair[1])
 
     @staticmethod
     def messageError(text):
         msg_box = QMessageBox(QMessageBox.Warning, "error", text)
+        # msg_box.setStyleSheet("QLabel{"
+        #                       "min-width: 40px;"
+        #                       "min-height: 40px;"
+        #                       "}")
         msg_box.exec_()
 
     @staticmethod
     def messageSuccess(text):
         msg_box = QMessageBox(QMessageBox.Information, "成功", text)
+        msg_box.setStyleSheet("QLabel{"
+                              "min-width: 200px;"
+                              "min-height: 100px;"
+                              "}")
         msg_box.exec_()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
+        self.event.set()
         if self.checkSerial():
             self.aSerial.close()
         self.event.set()
@@ -251,7 +276,6 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
             if event.is_set():
                 event.clear()
                 break
-            time.sleep(0.1)
 
 
 def main():
