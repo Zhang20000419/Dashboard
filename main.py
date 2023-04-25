@@ -1,19 +1,17 @@
-import os
 import sys
 from serial.tools import list_ports
 from PyQt5 import QtGui
-import os
 import test
-from PyQt5.QtCore import *
-from PyQt5.QtGui import *
+# from PyQt5.QtCore import *
+# from PyQt5.QtGui import *
 from PyQt5.QtWidgets import *
 import serial
 import threading
-import time
 from threading import Event
 
 endChar = "!"
 fileCheckInfo = "servo's character file"
+
 
 class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     """通过串口传递参数和命令时，串口写入的数据第一部分分为：parameter和command两种"""
@@ -72,88 +70,163 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
         self.stopbits = stopbits
 
     def getforceGAINin(self, forceGAINin):
-        self.dictNameToValue.update({"forceGAINin": forceGAINin})
+        if forceGAINin == '':
+            self.dictNameToValue.pop("forceGAINin")
+        else:
+            self.dictNameToValue.update({"forceGAINin": forceGAINin})
 
     def getforceIIR1a0(self, forceIIR1a0):
-        self.dictNameToValue.update({"forceIIR1a0": forceIIR1a0})
+        if forceIIR1a0 == '':
+            self.dictNameToValue.pop("forceIIR1a0")
+        else:
+            self.dictNameToValue.update({"forceIIR1a0": forceIIR1a0})
 
     def getforceIIR1a1(self, forceIIR1a1):
-        self.dictNameToValue.update({"forceIIR1a1": forceIIR1a1})
+        if forceIIR1a1 == '':
+            self.dictNameToValue.pop("forceIIR1a1")
+        else:
+            self.dictNameToValue.update({"forceIIR1a1": forceIIR1a1})
 
     def getforceIIR1b1(self, forceIIR1b1):
-        self.dictNameToValue.update({"forceIIR1b1": forceIIR1b1})
+        if forceIIR1b1 == '':
+            self.dictNameToValue.pop("forceIIR1b1")
+        else:
+            self.dictNameToValue.update({"forceIIR1b1": forceIIR1b1})
 
     def getforceIIR2a0(self, forceIIR2a0):
-        self.dictNameToValue.update({"forceIIR2a0": forceIIR2a0})
+        if forceIIR2a0 == '':
+            self.dictNameToValue.pop("forceIIR2a0")
+        else:
+            self.dictNameToValue.update({"forceIIR2a0": forceIIR2a0})
 
     def getforceIIR2a1(self, forceIIR2a1):
-        self.dictNameToValue.update({"forceIIR2a1": forceIIR2a1})
+        if forceIIR2a1 == '':
+            self.dictNameToValue.pop("forceIIR2a1")
+        else:
+            self.dictNameToValue.update({"forceIIR2a1": forceIIR2a1})
 
     def getforceIIR2b1(self, forceIIR2b1):
-        self.dictNameToValue.update({"forceIIR2b1": forceIIR2b1})
+        if forceIIR2b1 == '':
+            self.dictNameToValue.pop("forceIIR2b1")
+        else:
+            self.dictNameToValue.update({"forceIIR2b1": forceIIR2b1})
 
     def getforceBIASout(self, forceBIASout):
-        self.dictNameToValue.update({"forceBIASout": forceBIASout})
+        if forceBIASout == '':
+            self.dictNameToValue.pop("forceBIASout")
+        else:
+            self.dictNameToValue.update({"forceBIASout": forceBIASout})
 
     def getforceGAINout(self, forceGAINout):
-        self.dictNameToValue.update({"forceGAINout": forceGAINout})
+        if forceGAINout == '':
+            self.dictNameToValue.pop("forceGAINout")
+        else:
+            self.dictNameToValue.update({"forceGAINout": forceGAINout})
 
     def gettrackBIASin(self, trackBIASin):
-        self.dictNameToValue.update({"trackBIASin": trackBIASin})
+        if trackBIASin == '':
+            self.dictNameToValue.pop("trackBIASin")
+        else:
+            self.dictNameToValue.update({"trackBIASin": trackBIASin})
 
     def gettrackGAINin(self, trackGAINin):
-        self.dictNameToValue.update({"trackGAINin": trackGAINin})
+        if trackGAINin == '':
+            self.dictNameToValue.pop("trackGAINin")
+        else:
+            self.dictNameToValue.update({"trackGAINin": trackGAINin})
 
     def gettrackIIR1a0(self, trackIIR1a0):
-        self.dictNameToValue.update({"trackIIR1a0": trackIIR1a0})
+        if trackIIR1a0 == '':
+            self.dictNameToValue.pop("trackIIR1a0")
+        else:
+            self.dictNameToValue.update({"trackIIR1a0": trackIIR1a0})
 
     def gettrackIIR1a1(self, trackIIR1a1):
-        self.dictNameToValue.update({"trackIIR1a1": trackIIR1a1})
+        if trackIIR1a1 == '':
+            self.dictNameToValue.pop("trackIIR1a1")
+        else:
+            self.dictNameToValue.update({"trackIIR1a1": trackIIR1a1})
 
     def gettrackIIR1b1(self, trackIIR1b1):
-        self.dictNameToValue.update({"trackIIR1b1": trackIIR1b1})
+        if trackIIR1b1 == '':
+            self.dictNameToValue.pop("trackIIR1b1")
+        else:
+            self.dictNameToValue.update({"trackIIR1b1": trackIIR1b1})
 
     def gettrackIIR2a0(self, trackIIR2a0):
-        self.dictNameToValue.update({"trackIIR2a0": trackIIR2a0})
+        if trackIIR2a0 == '':
+            self.dictNameToValue.pop("trackIIR2a0")
+        else:
+            self.dictNameToValue.update({"trackIIR2a0": trackIIR2a0})
 
     def gettrackIIR2a1(self, trackIIR2a1):
-        self.dictNameToValue.update({"trackIIR2a1": trackIIR2a1})
+        if trackIIR2a1 == '':
+            self.dictNameToValue.pop("trackIIR2a1")
+        else:
+            self.dictNameToValue.update({"trackIIR2a1": trackIIR2a1})
 
     def gettrackIIR2b1(self, trackIIR2b1):
-        self.dictNameToValue.update({"trackIIR2b1": trackIIR2b1})
+        if trackIIR2b1 == '':
+            self.dictNameToValue.pop("trackIIR2b1")
+        else:
+            self.dictNameToValue.update({"trackIIR2b1": trackIIR2b1})
 
     def gettrackBIASout(self, trackBIASout):
-        self.dictNameToValue.update({"trackBIASout": trackBIASout})
+        if trackBIASout == '':
+            self.dictNameToValue.pop("trackBIASout")
+        else:
+            self.dictNameToValue.update({"trackBIASout": trackBIASout})
 
     def gettrackGAINout(self, trackGAINout):
-        self.dictNameToValue.update({"trackGAINout": trackGAINout})
+        if trackGAINout == '':
+            self.dictNameToValue.pop("trackGAINout")
+        else:
+            self.dictNameToValue.update({"trackGAINout": trackGAINout})
 
     def getsledGAINin(self, sledGAINin):
-        self.dictNameToValue.update({"sledGAINin": sledGAINin})
+        if sledGAINin == '':
+            self.dictNameToValue.pop("sledGAINin")
+        else:
+            self.dictNameToValue.update({"sledGAINin": sledGAINin})
 
     def getsledGAINout(self, sledGAINout):
-        self.dictNameToValue.update({"sledGAINout": sledGAINout})
+        if sledGAINout == '':
+            self.dictNameToValue.pop("sledGAINout")
+        else:
+            self.dictNameToValue.update({"sledGAINout": sledGAINout})
 
     def getsledThreshold(self, sledThreshold):
-        self.dictNameToValue.update({"sledThreshold": sledThreshold})
+        if sledThreshold == '':
+            self.dictNameToValue.pop("sledThreshold")
+        else:
+            self.dictNameToValue.update({"sledThreshold": sledThreshold})
 
     def getsledSpeed(self, sledSpeed):
-        self.dictNameToValue.update({"sledSpeed": sledSpeed})
+        if sledSpeed == '':
+            self.dictNameToValue.pop("sledSpeed")
+        else:
+            self.dictNameToValue.update({"sledSpeed": sledSpeed})
 
     def getspindleSpeed(self, spindleSpeed):
-        self.dictNameToValue.update({"spindleSpeed": spindleSpeed})
+        if spindleSpeed == '':
+            self.dictNameToValue.pop("spindleSpeed")
+        else:
+            self.dictNameToValue.update({"spindleSpeed": spindleSpeed})
 
     def openSerial(self):
         if self.aSerial is not None:
             if self.aSerial.isOpen():
-                self.aSerial.close()
+                self.messageError("串口已打开，请先关闭串口")
+                return
+            else:
+                self.aSerial = None
         if self.connectCheck():
             try:
                 # 清空接收窗口
                 self.InfoReceived.clear()
                 self.aSerial = self.connectMcu()
                 # 检查是否与MCU建立了通信
-                # self.sendOpenCheckInfo()
+                self.sendOpenCheckInfo()
                 # 创建接收从嵌入式处理器传回信息的线程
                 self.infoReceivedThread = threading.Thread(target=self.updateInfoReceived, args=(self.event,))
                 self.infoReceivedThread.start()
@@ -191,7 +264,9 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def downloadParamsToMcu(self):
         if self.checkSerial():
-            self.aSerial.write(str("#parameter#" + str(dict) + endChar).encode("utf-8"))
+            self.aSerial.write(str("#param#" + str(self.dictNameToValue) + endChar).encode("utf-8"))
+            for key in self.dictNameToValue.keys():
+                self.aSerial.write(key + ":" + self.dictNameToValue.get(key) + ";")
             self.messageSuccess("参数已发送")
         else:
             self.messageError("串口未打开")
@@ -256,17 +331,16 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
     @staticmethod
     def messageSuccess(text):
         msg_box = QMessageBox(QMessageBox.Information, "成功", text)
-        msg_box.setStyleSheet("QLabel{"
-                              "min-width: 200px;"
-                              "min-height: 100px;"
-                              "}")
+        # msg_box.setStyleSheet("QLabel{"
+        #                       "min-width: 200px;"
+        #                       "min-height: 100px;"
+        #                       "}")
         msg_box.exec_()
 
     def closeEvent(self, a0: QtGui.QCloseEvent) -> None:
         self.event.set()
         if self.checkSerial():
             self.aSerial.close()
-        self.event.set()
         super().closeEvent(a0)
 
     def updateInfoReceived(self, event):
