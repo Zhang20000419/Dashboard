@@ -10,7 +10,7 @@ import threading
 from threading import Event
 
 endChar = "!"
-fileCheckInfo = "servo's character file"
+fileCheckInfo = "# this is a servo's character file"
 
 
 class MyMainWindow(QMainWindow, test.Ui_MainWindow):
@@ -264,13 +264,18 @@ class MyMainWindow(QMainWindow, test.Ui_MainWindow):
 
     def downloadParamsToMcu(self):
         if self.checkSerial():
-            self.aSerial.write(str("#param#" + str(self.dictNameToValue) + endChar).encode("utf-8"))
-            for key in self.dictNameToValue.keys():
-                self.aSerial.write(key + ":" + self.dictNameToValue.get(key) + ";")
+            self.aSerial.write(str("#param#" + self.dictToStr() + endChar).encode("utf-8"))
+            # for key in self.dictNameToValue.keys():
+            #     self.aSerial.write(key + ":" + self.dictNameToValue.get(key) + ";")
             self.messageSuccess("参数已发送")
         else:
             self.messageError("串口未打开")
 
+    def dictToStr(self):
+        astring = ''
+        for key in self.dictNameToValue.keys():
+            astring = astring+key+":"+self.dictNameToValue.get(key)+"@"
+        return astring
     def connectCheck(self):
         if self.port == "":
             self.messageError("端口号不能为空")
